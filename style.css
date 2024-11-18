@@ -1,6 +1,5 @@
 /*--style--*/
 
-
 body {
     font-family: Arial, sans-serif;
     background-color: rgb(200, 200, 200);
@@ -8,25 +7,28 @@ body {
     margin: 0;
     color: #333;
 }
+
 header {
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-    padding: 10px;
-    color: white;
 }
-#webcam, #canvas {
+
+#webcam,
+#canvas {
     max-width: 100%;
     height: auto;
 }
+
 #canvas {
     position: absolute;
     top: 0;
     left: 0;
     pointer-events: none;
 }
+
 .output {
     max-height: 200px;
     overflow-y: auto;
@@ -35,6 +37,7 @@ header {
     margin: 10px;
     border-radius: 8px;
 }
+
 button {
     padding: 14px 20px;
     background: #3498db;
@@ -46,19 +49,23 @@ button {
     font-size: bold;
     width: 270px;
 }
+
 button:hover {
     background: #2980b9;
 }
+
 .output ul {
     list-style-type: none;
     padding: 0;
 }
+
 .output li {
     background: #f9f9f9;
     margin: 5px 0;
     padding: 5px;
     font-size: 12px;
 }
+
 .output li span {
     font-weight: bold;
     color: #e74c3c;
