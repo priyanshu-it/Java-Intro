@@ -45,7 +45,7 @@ git commit -m "Initial commit"
 Remove any old remotes and add your correct repo:
 
 ```bash
-git remote remove origin  # (only if added wrong one earlier)
+git remote remove origin 
 git remote add origin https://github.com/Priyanshu-it/your_site-in.git
 ```
 
