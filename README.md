@@ -57,7 +57,8 @@ git remote add origin https://github.com/Priyanshu-it/your_site-in.git
 git branch -M main
 git push -u origin main
 ```
-
+git push origin main --force
+ 
 Now your code is pushed to GitHub:
 🔗 [https://github.com/Priyanshu-it/your_site-in](https://github.com/Priyanshu-it/your_site-in)
 
