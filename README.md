@@ -46,7 +46,7 @@ Remove any old remotes and add your correct repo:
 
 ```bash
 git remote remove origin 
-git remote add origin https://github.com/Priyanshu-it/your_site-in.git
+git remote add origin https://github.com/priyanshu-it/your_site.git
 ```
 
 ---
