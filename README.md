@@ -1,4 +1,4 @@
-Absolutely! Let’s start from **Step 1** and go step-by-step to deploy your React app (``your_name_project (m..-application)``) 
+Absolutely! Let’s start from **Step 1** and go step-by-step to deploy your React app(``your_name_project (m..-application)``) 
 to **GitHub Pages** using the GitHub repo `your_site_name-in`.
 
 ---
