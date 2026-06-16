@@ -62,6 +62,13 @@ git push origin main --force
 Now your code is pushed to GitHub:
 🔗 [https://github.com/Priyanshu-it/your_site-in](https://github.com/Priyanshu-it/your_site-in)
 
+### Update Code to GitHub
+```
+git pull origin main --rebase
+git push origin main
+```
+That’s the correct “update then push” flow.
+
 ---
 
 ### ✅ STEP 6: Install `gh-pages` package
