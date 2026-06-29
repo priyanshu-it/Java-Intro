@@ -142,7 +142,12 @@ Open your deployed app in browser:
 
 ```
 https://Priyanshu-it.github.io/your_site-in
-```
+``` 
+
+### Extra code .env hide (1st step code pasate, after that 2nd step upload github project.)
+git rm --cached .env                          
+>> git commit -m "Remove .env from repository"
+>> git push 
 
 ---
 
