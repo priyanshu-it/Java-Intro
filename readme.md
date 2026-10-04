@@ -152,3 +152,53 @@ git rm --cached .env
 ---
 
 Let me know when you're done with `npm run deploy`, or if you want help designing a homepage or fixing 404s in routing.
+
+
+## Git Commands
+
+### Check Project Status
+
+```bash
+git status
+```
+
+### Add Changes
+
+```bash
+git add .
+```
+
+### Commit Changes
+
+```bash
+git commit -m "Your commit message"
+```
+
+### Push Changes
+
+```bash
+git push
+```
+
+### If Push Is Rejected
+
+First update your local branch:
+
+```bash
+git pull origin main
+```
+
+Then push again:
+
+```bash
+git push origin main
+```
+
+### Force Push
+
+Use only when you intentionally want to replace the remote branch history:
+
+```bash
+git push origin main --force
+```
+
