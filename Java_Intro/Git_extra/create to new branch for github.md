@@ -100,28 +100,6 @@ This means:
 - `feature-1` is your current branch.
 - `main` is your original branch.
 
-## Git workflow visualization
-
-main branch
-
-Original project branch
-
-git checkout -b feature-1
-
-feature-1 branch
-
-New feature development
-
-git add .
-
-git commit -m "new feature"
-
-git push -u origin feature-1
-
-GitHub Repository
-
-feature-1 branch uploaded successfully
-
 ## Important Git commands for daily work
 
 | Command                   | Purpose                        |
